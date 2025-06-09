@@ -2,7 +2,7 @@
     "Frontend": true,
     "Pendaftaran": true,
     "PPDB": true,
-    "Perpustakaan": true,
+    "Perpustakaan": false,
     "Murid": true,
     "SPP": true
 }

@@ -7,15 +7,19 @@
     "require": {
         "php": "^7.3|^8.0",
         "andes2912/indobank": "^0.7.0",
+        "doctrine/dbal": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "midtrans/midtrans-php": "^2.6",
         "nwidart/laravel-modules": "^8.3",
         "spatie/laravel-permission": "^5.5"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.7",
+        "enlightn/enlightn": "^1.26",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",

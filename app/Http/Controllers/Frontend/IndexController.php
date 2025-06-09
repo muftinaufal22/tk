@@ -51,7 +51,7 @@ class IndexController extends Controller
     }
 
     // Berita
-    public function berita()
+    public function berita(Request $request)
     {
          // Menu
          $jurusanM = Jurusan::where('is_active','0')->get();
@@ -63,10 +63,50 @@ class IndexController extends Controller
          // Kategori
          $kategori = KategoriBerita::where('is_active','0')->orderBy('created_at','desc')->get();
          
+         // Pencarian
+         $search = $request->input('search');
+         $tanggal = $request->input('tanggal');
+         
          // Berita
-         $berita = Berita::where('is_active','0')->orderBy('created_at','desc')->paginate(10);
- 
-         return view('frontend.content.beritaAll', compact('berita','kategori','jurusanM','kegiatanM','footer'));
+         $berita = Berita::where('is_active','0')->orderBy('created_at','desc');
+         
+         // Kegiatan dengan label baru (kegiatan yang dibuat dalam 7 hari terakhir)
+         $kegiatan = Kegiatan::where('is_active','1')
+                    ->select('id', 'nama_kegiatan as title', 'gambar as thumbnail', 'tanggal', 'deskripsi', 'created_at')
+                    ->selectRaw("'kegiatan' as type")
+                    ->selectRaw("DATEDIFF(NOW(), created_at) <= 7 as is_new");
+         
+         // Filter pencarian jika ada
+         if ($search) {
+             $berita->where('title', 'like', "%{$search}%");
+             $kegiatan->where('nama_kegiatan', 'like', "%{$search}%");
+         }
+         
+         if ($tanggal) {
+             $kegiatan->whereDate('tanggal', $tanggal);
+         }
+         
+         // Gabungkan data berita dan kegiatan
+         $combinedData = $berita->get()->concat($kegiatan->get())
+                        ->sortByDesc('created_at')
+                        ->values();
+         
+         // Paginasi manual
+         $perPage = 8;
+         $currentPage = $request->input('page', 1);
+         $currentItems = $combinedData->forPage($currentPage, $perPage);
+         $paginatedItems = new \Illuminate\Pagination\LengthAwarePaginator(
+             $currentItems,
+             $combinedData->count(),
+             $perPage,
+             $currentPage,
+             ['path' => $request->url(), 'query' => $request->query()]
+         );
+         
+         // Berita terbaru untuk sidebar
+         $berita = Berita::where('is_active','0')->orderBy('created_at','desc')->take(5)->get();
+         
+         return view('frontend.content.beritaAll', compact('paginatedItems', 'berita', 'kategori', 'jurusanM', 'kegiatanM', 'footer', 'search', 'tanggal'));
     }
     // Show Detail Berita
     public function detailBerita($slug)
@@ -86,6 +126,32 @@ class IndexController extends Controller
 
         $berita = Berita::where('slug',$slug)->first();
         return view('frontend.content.showBerita', compact('berita','kategori','beritaOther','jurusanM','kegiatanM','footer'));
+    }
+    
+    // Show Detail Kegiatan
+    public function detailKegiatan($id)
+    {
+        // Menu
+        $jurusanM = Jurusan::where('is_active','0')->get();
+        $kegiatanM = Kegiatan::where('is_active','0')->get();
+
+        // Footer
+        $footer = Footer::first();
+        
+        // Berita
+        $berita = Berita::where('is_active','0')->orderBy('created_at','desc')->take(5)->get();
+
+        // Kegiatan
+        $kegiatan = Kegiatan::findOrFail($id);
+        
+        // Kegiatan lainnya
+        $kegiatanLainnya = Kegiatan::where('is_active','1')
+                          ->where('id', '!=', $kegiatan->id)
+                          ->orderBy('created_at','desc')
+                          ->take(4)
+                          ->get();
+                          
+        return view('frontend.content.detailKegiatan', compact('kegiatan', 'kegiatanLainnya', 'berita', 'jurusanM', 'kegiatanM', 'footer'));
     }
 
 

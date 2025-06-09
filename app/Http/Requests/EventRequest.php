@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\maxCharacters;
 
 class EventRequest extends FormRequest
 {
@@ -24,39 +23,34 @@ class EventRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->method() == 'POST') {
-            return [
-                'title'     => ['required','unique:events,title'],
-                'desc'      => [new maxCharacters(200), 'required'],
-                'content'   => ['required'],
-                'acara'     => ['required'],
-                'lokasi'    => ['required'],
-                'thumbnail' => ['required','image','max:1024']
-            ];
-        }
-
+        $eventId = $this->route('backend_event') ? $this->route('backend_event') : null;
+        
         return [
-            'title'     => ['required'],
-            'desc'      => [new maxCharacters(200), 'required'],
-            'content'   => ['required'],
-            'acara'     => ['required'],
-            'lokasi'    => ['required'],
-            'thumbnail' => ['image','max:1024']
+            'title' => 'required|max:255|unique:events,title,' . $eventId,
+            // 'desc' => 'required',
+            'jenis_event' => 'required|in:1,2,3',
+            'acara' => 'required|date',
+            'lokasi' => 'required|max:255',
+            'is_Active' => 'sometimes|in:0,1'
         ];
     }
 
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
     public function messages()
     {
         return [
-            'title.required'        => 'Title tidak boleh kosong.',
-            'title.unique'          => 'Title sudah pernah digunakan.',
-            'desc.required'         => 'Deskripsi tidak boleh singkat.',
-            'content.required'      => 'Content tidak boleh kosong.',
-            'acara.required'        => 'Acara Mulai tidak boleh kosong.',
-            'lokasi.required'       => 'Lokasi Event tidak boleh kosong.',
-            'thumbnail.required'    => 'Gambar Thumbnail tidak boleh kosong.',
-            'thumbnail.image'       => 'Gambar Thumbnail yang di input tidak valid.',
-            'thumbnail.max'         => 'Maksimal Gambar Thumbnail 1MB.'
+            'title.required' => 'Judul event harus diisi.',
+            'title.unique' => 'Judul event sudah ada.',
+            // 'desc.required' => 'Deskripsi event harus diisi.',
+            'jenis_event.required' => 'Jenis event harus dipilih.',
+            'jenis_event.in' => 'Jenis event tidak valid.',
+            'acara.required' => 'Waktu acara harus diisi.',
+            'acara.date' => 'Format waktu acara tidak valid.',
+            'lokasi.required' => 'Lokasi acara harus diisi.',
         ];
     }
 }

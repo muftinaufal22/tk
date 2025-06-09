@@ -8,6 +8,7 @@
                 <div class="card-header">{{ __('Confirm Password') }}</div>
 
                 <div class="card-body">
+                    {{-- Halaman ini adalah halaman konfirmasi password yang digunakan untuk memverifikasi password pengguna sebelum mengakses halaman atau fitur tertentu yang memerlukan keamanan tambahan --}}
                     {{ __('Please confirm your password before continuing.') }}
 
                     <form method="POST" action="{{ route('password.confirm') }}">

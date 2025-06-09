@@ -80,8 +80,10 @@
                                 </div>
 
                             </div>
-                            <button class="btn btn-primary" type="submit">Simpan</button>
-                            <a href="/home" class="btn btn-warning">Batal</a>
+                            <div class="text-right">
+                                <a href="{{ url()->previous() }}" class="btn btn-warning">Kembali</a>
+                                <button class="btn btn-primary" type="submit">Simpan</button>
+                            </div>
                         </form>
                     </div>
                 </div>

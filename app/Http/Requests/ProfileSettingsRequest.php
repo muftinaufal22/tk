@@ -25,7 +25,6 @@ class ProfileSettingsRequest extends FormRequest
     {
         return [
             'name'          => ['required'],
-            'username'      => ['required'],
             'email'         => ['required','email'],
             'foto_profile'  => ['image','max:1024']
         ];
@@ -35,7 +34,6 @@ class ProfileSettingsRequest extends FormRequest
     {
         return [
             'name.required'         => 'Nama tidak boleh kosong.',
-            'username.required'     => 'Username tidak boleh kosong.',
             'email.required'        => 'Email tidak boleh kosong.',
             'email.email'           => 'Email yang dimasukan tidak valid.',
             'foto_profile.image'    => 'Foto Profile yang dimasukan tidak valid.',

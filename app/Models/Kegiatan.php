@@ -10,4 +10,13 @@ class Kegiatan extends Model
     use HasFactory;
 
     protected $table = 'kegiatans';
+    
+    protected $fillable = [
+        'nama_kegiatan',
+        'gambar',
+        'tanggal',
+        'deskripsi'
+    ];
 }
+
+// File: app/Http/Requests/KegiatanRequest.php

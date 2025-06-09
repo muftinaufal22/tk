@@ -1,22 +1,53 @@
-<!-- <div class="counter-area bg-primary-deep" style="background-image: url({{asset('Assets/Frontend/img/banner/4.jpg')}});">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 counter1-box wow fadeInUp" data-wow-duration=".5s" data-wow-delay=".20s">
-                <h2 class="about-counter title-bar-counter" data-num="20">20</h2>
-                <p>PENGAJAR PROFESSIONAL</p>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 counter1-box wow fadeInUp" data-wow-duration=".5s" data-wow-delay=".40s">
-                <h2 class="about-counter title-bar-counter" data-num="20">20</h2>
-                <p>FASILTAS SEKOLAH</p>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 counter1-box wow fadeInUp" data-wow-duration=".5s" data-wow-delay=".60s">
-                <h2 class="about-counter title-bar-counter" data-num="10">10</h2>
-                <p>EKSTRAKULIKULER</p>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 counter1-box wow fadeInUp" data-wow-duration=".5s" data-wow-delay=".80s">
-                <h2 class="about-counter title-bar-counter" data-num="77">77</h2>
-                <p>MURID TERDAFTAR</p>
-            </div>
-        </div>
-    </div>
-</div> -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penerimaan Peserta Didik Baru (PPDB) RA Al Barokah</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      
+       
+        h1, h2 {
+            text-align: center;
+            color: #2d4b7d;
+        }
+        ul {
+            list-style-type: decimal;
+            padding-left: 20px;
+        }
+        li {
+            margin: 10px 0;
+        }
+        .note {
+            font-style: italic;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>PERSYARATAN UMUM (PPDB)</h1>
+    <h2>RA AL BAROKAH Temuasri Tahun Pelajaran 2025 / 2026</h2>
+
+    <h3>Ketentuan Sebagai Berikut:</h3>
+    <ul>
+        <li>Usia kurang lebih 4 tahun.</li>
+        <li>Sehat jasmani dan rohani.</li>
+        <li>Biaya pendaftaran sebesar Rp 100.000,- (Seratus ribu rupiah).</li>
+        <li>Mengisi Formulir</li>
+        <li>Mengirim foto akta kelahiran.</li>
+        <li>Mengirim pas foto berwarna ukuran 3 x 4.</li>
+        <li>Mengirim foto Kartu Keluarga.</li>
+        <li>Mengirim foto KTP Orangtua.</li>
+        <li>Pembayaran dapat dilakukan setelah murid diterima.</li> 
+    </ul>
+
+    <p class="note">*Pastikan Anda sudah menyiapkan semua persyaratan di atas untuk kelancaran proses pendaftaran.</p>
+</div>
+
+
+
+</body>
+</html>

@@ -9,10 +9,28 @@ class Jurusan extends Model
 {
     use HasFactory;
 
-    protected $table = 'jurusans';
+    protected $fillable = [
+        'hari',
+        'jam_mulai',
+        'jam_selesai',
+        'pelajaran',
+        'kelas_id',
+        'is_active'
+    ];
 
+    /**
+     * Get the class that owns the schedule.
+     */
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id');
+    }
+
+    /**
+     * Get the associated jurusan data.
+     */
     public function dataJurusan()
     {
-        return $this->belongsTo(DataJurusan::class,'id','jurusan_id');
+        return $this->hasOne(DataJurusan::class);
     }
 }

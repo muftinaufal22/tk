@@ -1,5 +1,9 @@
 <?php
 
+namespace Modules\PPDB\Routes;
+
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +18,7 @@
 
 Route::prefix('ppdb')->group(function() {
     Route::get('/', 'PPDBController@index');
-
+    
     /// REGISTER \\\
     Route::get('/register','AuthController@registerView')->name('register');
     Route::post('/register','AuthController@registerStore')->name('register.store');
@@ -40,8 +44,11 @@ Route::prefix('/ppdb')->middleware('role:Guest')->group( function (){
 
 //// ROLE PPDB \\\\
 Route::prefix('/ppdb')->middleware('role:PPDB|Admin')->group( function (){
-
-
+    
     /// DATA MURID \\\
     Route::resource('data-murid','DataMuridController');
+    
+    /// PPDB SETTINGS \\\
+    Route::get('settings','PpdbSettingController@index')->name('ppdb.settings');
+    Route::put('settings','PpdbSettingController@update')->name('ppdb.settings.update');
 });

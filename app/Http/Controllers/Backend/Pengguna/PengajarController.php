@@ -83,7 +83,7 @@ class PengajarController extends Controller
 
             $user->assignRole($user->role);
             DB::commit();
-            Session::flash('success','Pengajar Berhasil ditambah !');
+            Session::flash('success','Guru Berhasil ditambah !');
             return redirect()->route('backend-pengguna-pengajar.index');
 
         } catch (ErrorException $e) {
@@ -161,7 +161,7 @@ class PengajarController extends Controller
             }
 
             DB::commit();
-            Session::flash('success','Pengajar Berhasil diubah !');
+            Session::flash('success','Guru Berhasil diubah !');
             return redirect()->route('backend-pengguna-pengajar.index');
 
         } catch (ErrorException $e) {
@@ -177,7 +177,30 @@ class PengajarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+{
+    try {
+        DB::beginTransaction();
+
+        $user = User::findOrFail($id);
+
+        // Hapus detail user terlebih dahulu
+        UsersDetail::where('user_id', $user->id)->delete();
+
+        // Hapus file foto profil jika ada
+        if ($user->foto_profile && \Storage::exists('public/images/profile/' . $user->foto_profile)) {
+            \Storage::delete('public/images/profile/' . $user->foto_profile);
+        }
+
+        // Hapus user utama
+        $user->delete();
+
+        DB::commit();
+        Session::flash('success', 'Guru berhasil dihapus!');
+        return redirect()->route('backend-pengguna-pengajar.index');
+    } catch (\Exception $e) {
+        DB::rollback();
+        Session::flash('error', 'Gagal menghapus Guru: ' . $e->getMessage());
+        return redirect()->route('backend-pengguna-pengajar.index');
     }
+}
 }

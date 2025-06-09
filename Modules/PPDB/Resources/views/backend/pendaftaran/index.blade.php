@@ -10,7 +10,7 @@
         <div class="content-header-left col-md-9 col-12 mb-2">
             <div class="row breadcrumbs-top">
                 <div class="col-12">
-                    <h2>Form Pendaftaran PPDB SMK Yadika Natar</h2>
+                    <h2>Form Pendaftaran PPDB RA Al Barokah</h2>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <!-- <div class="col-6">
                                     <div class="form-group">
                                         <label for="basicInput">NIS</label>
                                         <input type="text" class="form-control @error('nis') is-invalid @enderror" name="nis" value=" {{$user->muridDetail->nis}} " disabled/>
@@ -68,7 +68,7 @@
                                             </div>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="col-6">
                                     <div class="form-group">
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-6">
+                                <!-- <div class="col-6">
                                     <div class="form-group">
                                         <label for="basicInput">No Telp</label>
                                         <input type="text" class="form-control @error('telp') is-invalid @enderror" name="telp" value=" {{$user->muridDetail->telp}} "/>
@@ -104,7 +104,7 @@
                                             </div>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="col-6">
                                     <div class="form-group">
@@ -140,16 +140,19 @@
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="basicInput">Asal Sekolah</label>
-                                        <input type="text" class="form-control @error('asal_sekolah') is-invalid @enderror" name="asal_sekolah" value=" {{$user->muridDetail->asal_sekolah}} "/>
-                                        @error('asal_sekolah')
+                                        <label for="basicInput">Jenis Kelamin</label>
+                                        <select name="jenis_kelamin" class="form-control @error('jenis_kelamin') is-invalid @enderror">
+                                            <option value="">-- Pilih --</option>
+                                            <option value="Laki-laki" {{$user->muridDetail->jenis_kelamin == 'Laki-laki' ? 'selected' : ''}}>Laki-laki</option>
+                                            <option value="Perempuan" {{$user->muridDetail->jenis_kelamin == 'Perempuan' ? 'selected' : ''}}>Perempuan</option>
+                                        </select>
+                                        @error('jenis_kelamin')
                                             <div class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
                                             </div>
                                         @enderror
                                     </div>
                                 </div>
-
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="basicInput">Alamat Lengkap</label>
@@ -162,8 +165,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary" type="submit">Simpan</button>
-                            <a href="/home" class="btn btn-warning">Batal</a>
+                            <div class="text-right">
+                                <a href="/home" class="btn btn-warning">Batal</a>
+                                <button class="btn btn-primary" type="submit">Simpan</button>
+                            </div>
                         </form>
                     </div>
                 </div>

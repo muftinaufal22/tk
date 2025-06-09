@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-6">
+                                <!-- <div class="col-6">
                                     <div class="form-group">
                                         <label for="basicInput">Thumbnail</label>
                                         <input type="file" class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail"/>
@@ -63,7 +63,7 @@
                                             <strong>{{ $message }}</strong>
                                             </div>
                                         @enderror
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
@@ -81,7 +81,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <!-- <div class="col-12">
                                     <div class="form-group">
                                         <label for="basicInput">Content</label> <span class="text-danger">*</span>
                                         <textarea name="content" class="form-control  @error('content') is-invalid @enderror" cols="30" rows="10"></textarea>
@@ -91,7 +91,7 @@
                                             </div>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> -->
                               
                             </div>
                             <button class="btn btn-primary" type="submit">Tambah</button>

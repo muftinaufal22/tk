@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}">
     @include('layouts.Frontend.style')
 </head>
 
@@ -19,27 +19,26 @@
     <!-- Preloader End Here -->
     <!-- Main Body Area Start Here -->
     <div id="wrapper">
-        @yield('content')
         <!-- Header Area Start Here -->
         <header>
            @include('ppdb::layouts.header')
         </header>
         <!-- Header Area End Here -->
 
-        
+        {{-- Content Section --}}
+        @yield('content')
+
+        {{-- Other Sections (Slider, Studi, Count, Why, Video) --}}
         @yield('slider')
 
         <div class="about2-area">
             @yield('studi')
         </div>
 
-        
         @yield('count')
 
-        
         @yield('why')
 
-        
         @yield('video')
 
         <!-- Footer Area Start Here -->

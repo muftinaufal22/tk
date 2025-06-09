@@ -9,6 +9,8 @@ use App\Http\Requests\KegiatanRequest;
 use ErrorException;
 use Session;
 use DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class KegiatanController extends Controller
 {
@@ -36,34 +38,38 @@ class KegiatanController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\KegiatanRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(KegiatanRequest $request)
     {
+        DB::beginTransaction();
         try {
-            if ($request->image) {
-                $image = $request->file('image');
+            $nama_img = null;
+            if ($request->hasFile('gambar')) {
+                $image = $request->file('gambar');
                 $nama_img = time()."_".$image->getClientOriginalName();
                 // isi dengan nama folder tempat kemana file diupload
                 $tujuan_upload = 'public/images/kegiatan';
-                $image->storeAs($tujuan_upload,$nama_img);
+                $image->storeAs($tujuan_upload, $nama_img);
             }
 
-            $url = \Str::slug($request->nama);
             $kegiatan = new Kegiatan();
-            $kegiatan->nama     = $request->nama;
-            $kegiatan->slug     = $url;
-            $kegiatan->image    = $nama_img ?? NULL;
-            $kegiatan->content  = $request->content;
+            $kegiatan->nama_kegiatan = $request->nama_kegiatan;
+            $kegiatan->tanggal       = $request->tanggal;
+            $kegiatan->gambar        = $nama_img;
+            $kegiatan->deskripsi     = $request->deskripsi;
+            $kegiatan->is_active     = $request->is_active;
             $kegiatan->save();
 
+            DB::commit();
             Session::flash('success','Kegiatan Berhasil ditambah !');
-            return redirect()->route('backend-kegiatan.index');
+            return redirect()->route('backend-kegiatan.index')->with('success', 'Kegiatan berhasil ditambah!');
         } catch (ErrorException $e) {
-            throw new ErrorException($e->getMessage());
+            DB::rollback();
+            Session::flash('error', $e->getMessage());
+            return redirect()->back()->withInput();
         }
-
     }
 
     /**
@@ -74,6 +80,7 @@ class KegiatanController extends Controller
      */
     public function show($id)
     {
+        //
     }
 
     /**
@@ -91,34 +98,43 @@ class KegiatanController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\KegiatanRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(KegiatanRequest $request, $id)
     {
+        DB::beginTransaction();
         try {
-            if ($request->image) {
-                $image = $request->file('image');
+            $kegiatan = Kegiatan::findOrFail($id);
+            
+            if ($request->hasFile('gambar')) {
+                // Hapus gambar lama jika ada
+                if ($kegiatan->gambar && Storage::exists('public/images/kegiatan/'.$kegiatan->gambar)) {
+                    Storage::delete('public/images/kegiatan/'.$kegiatan->gambar);
+                }
+                
+                $image = $request->file('gambar');
                 $nama_img = time()."_".$image->getClientOriginalName();
                 // isi dengan nama folder tempat kemana file diupload
                 $tujuan_upload = 'public/images/kegiatan';
-                $image->storeAs($tujuan_upload,$nama_img);
+                $image->storeAs($tujuan_upload, $nama_img);
+                $kegiatan->gambar = $nama_img;
             }
 
-            $url = \Str::slug($request->nama);
-            $kegiatan = Kegiatan::findOrFail($id);
-            $kegiatan->nama         = $request->nama;
-            $kegiatan->slug         = $url;
-            $kegiatan->image        = $nama_img ?? $kegiatan->image;
-            $kegiatan->is_active    = $request->is_active;
-            $kegiatan->content      = $request->content;
+            $kegiatan->nama_kegiatan = $request->nama_kegiatan;
+            $kegiatan->tanggal       = $request->tanggal;
+            $kegiatan->deskripsi     = $request->deskripsi;
+            $kegiatan->is_active     = $request->is_active;
             $kegiatan->save();
 
+            DB::commit();
             Session::flash('success','Kegiatan Berhasil diupdate !');
-            return redirect()->route('backend-kegiatan.index');
+            return redirect()->route('backend-kegiatan.index')->with('success', 'Kegiatan berhasil diupdate!');
         } catch (ErrorException $e) {
-            throw new ErrorException($e->getMessage());
+            DB::rollback();
+            Session::flash('error', $e->getMessage());
+            return redirect()->back()->withInput();
         }
     }
 
@@ -130,6 +146,21 @@ class KegiatanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $kegiatan = Kegiatan::findOrFail($id);
+            
+            // Hapus gambar jika ada
+            if ($kegiatan->gambar && Storage::exists('public/images/kegiatan/'.$kegiatan->gambar)) {
+                Storage::delete('public/images/kegiatan/'.$kegiatan->gambar);
+            }
+            
+            $kegiatan->delete();
+            
+            Session::flash('success','Kegiatan Berhasil dihapus!');
+            return redirect()->route('backend-kegiatan.index');
+        } catch (ErrorException $e) {
+            Session::flash('error', $e->getMessage());
+            return redirect()->back();
+        }
     }
 }

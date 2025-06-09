@@ -24,7 +24,8 @@ class CreateDataMuridsTable extends Migration
             $table->string('telp')->nullable();
             $table->string('whatsapp')->nullable();
             $table->text('alamat')->nullable();
-            $table->string('asal_sekolah')->nullable();
+            $table->string('jenis_kelamin')->nullable();
+            $table->string('tahun_ajaran')->nullable();
             $table->timestamps();
         });
     }

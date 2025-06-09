@@ -24,17 +24,22 @@ class KegiatanRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama'      => ['required','unique:kegiatans'],
-            'content'   => ['required']
+            'nama_kegiatan' => ['required', 'unique:kegiatans'],
+            'gambar'        => ['nullable', 'image'],
+            'tanggal'       => ['required', 'date'],
+            'deskripsi'     => ['required']
         ];
     }
 
     public function messages()
     {
         return [
-            'nama.required'      => 'Nama Kegiatan tidak boleh kosong.',
-            'nama.unique'        => 'Nama Kegiatan sudah pernah dibuat.',
-            'content.required'   => 'Content tidak boleh kosong.'
+            'nama_kegiatan.required' => 'Nama Kegiatan tidak boleh kosong.',
+            'nama_kegiatan.unique'   => 'Nama Kegiatan sudah pernah dibuat.',
+            'gambar.image'           => 'File harus berupa gambar.',
+            'tanggal.required'       => 'Tanggal tidak boleh kosong.',
+            'tanggal.date'           => 'Format tanggal tidak valid.',
+            'deskripsi.required'     => 'Deskripsi tidak boleh kosong.'
         ];
     }
 }

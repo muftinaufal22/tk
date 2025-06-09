@@ -45,7 +45,7 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="basicInput">Title Event</label> <span class="text-danger">*</span>
-                                        <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value=" {{old('title')}} " placeholder="Title Event" />
+                                        <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{old('title')}}" placeholder="Title Event" />
                                         @error('title')
                                             <div class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
@@ -56,19 +56,25 @@
 
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="basicInput">Thumbnail</label> <span class="text-danger">*</span>
-                                        <input type="file" class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail"/>
-                                        @error('thumbnail')
+                                        <label for="basicInput">Jenis Event</label> <span class="text-danger">*</span>
+                                        <select class="form-control @error('jenis_event') is-invalid @enderror" name="jenis_event">
+                                            <option value="">Pilih Jenis Event</option>
+                                            <option value="1" {{ old('jenis_event') == '1' ? 'selected' : '' }}>Event 1</option>
+                                            <option value="2" {{ old('jenis_event') == '2' ? 'selected' : '' }}>Event 2</option>
+                                            <option value="3" {{ old('jenis_event') == '3' ? 'selected' : '' }}>Event 3</option>
+                                        </select>
+                                        @error('jenis_event')
                                             <div class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
                                             </div>
                                         @enderror
                                     </div>
                                 </div>
+
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="basicInput">Lokasi</label> <span class="text-danger">*</span>
-                                        <input type="text" class="form-control @error('lokasi') is-invalid @enderror" name="lokasi" value=" {{old('lokasi')}} " placeholder="Lokasi Acara"/>
+                                        <input type="text" class="form-control @error('lokasi') is-invalid @enderror" name="lokasi" value="{{old('lokasi')}}" placeholder="Lokasi Acara"/>
                                         @error('lokasi')
                                             <div class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
@@ -79,7 +85,7 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="basicInput">Waktu Dimulai</label> <span class="text-danger">*</span>
-                                        <input type="datetime-local" class="form-control @error('acara') is-invalid @enderror" name="acara" value=" {{old('acara')}} " placeholder="Waktu dimulai Acara"/>
+                                        <input type="datetime-local" class="form-control @error('acara') is-invalid @enderror" name="acara" value="{{old('acara')}}" placeholder="Waktu dimulai Acara"/>
                                         @error('acara')
                                             <div class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
@@ -88,22 +94,10 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="form-group"> <span class="text-danger">*</span>
-                                        <label for="basicInput">Desripsi Singkat</label> <span class="text-danger">*</span>
-                                        <textarea name="desc" class="form-control  @error('desc') is-invalid @enderror" rows="3"> {{old('desc')}} </textarea>
+                                    <div class="form-group">
+                                        <label for="basicInput">Deskripsi Singkat</label> <span class="text-danger">*</span>
+                                        <textarea name="desc" class="form-control @error('desc') is-invalid @enderror" rows="3" placeholder="Deskripsi event...">{{old('desc')}}</textarea>
                                         @error('desc')
-                                            <div class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="form-group"> <span class="text-danger">*</span>
-                                        <label for="basicInput">Content</label> <span class="text-danger">*</span>
-                                        <textarea name="content" class="form-control  @error('content') is-invalid @enderror" cols="30" rows="10"> {{old('content')}} </textarea>
-                                        @error('content')
                                             <div class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
                                             </div>
@@ -112,8 +106,10 @@
                                 </div>
                               
                             </div>
-                            <button class="btn btn-primary" type="submit">Tambah</button>
-                            <a href="{{route('backend-event.index')}}" class="btn btn-warning">Batal</a>
+                            <div class="text-right">
+                                <a href="{{route('backend-event.index')}}" class="btn btn-warning">Batal</a>
+                                <button class="btn btn-primary" type="submit">Tambah</button>
+                            </div>
                         </form>
                     </div>
                 </div>

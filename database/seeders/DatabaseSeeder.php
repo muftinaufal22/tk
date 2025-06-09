@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
            UserSeeder::class,
            AddRoleBendaharaSeederTableSeeder::class,
            IndoBankSeeder::class,
-           SettingSeeder::class
+           SettingSeeder::class,
+           KelasSeeder::class,
+           JurusanSeeder::class
         ]);
 
     }

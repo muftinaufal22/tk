@@ -63,12 +63,12 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                     <a class="nav-link" id="settings" data-toggle="pill" href="#account-setting" aria-expanded="false">
                                         <i data-feather="bell" class="font-medium-3 mr-1"></i>
                                         <span class="font-weight-bold">Notifications</span>
                                     </a>
-                                </li>
+                                </li> -->
                         </ul>
                     </div>
                     <!--/ left menu section -->

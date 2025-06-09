@@ -87,7 +87,6 @@ class ProfileController extends Controller
 
             $profile = User::find($id);
             $profile->name          = $request->name;
-            $profile->username      = $request->username;
             $profile->email         = $request->email;
             $profile->foto_profile  = $nama_image ?? $profile->foto_profile;
             if ($request->email) {

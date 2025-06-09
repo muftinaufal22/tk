@@ -1,176 +1,196 @@
-<!DOCTYPE html>
-<html class="loading semi-dark-layout" lang="en" data-layout="semi-dark-layout" data-textdirection="ltr">
-<!-- BEGIN: Head-->
+{{-- resources/views/auth/login.blade.php --}}
+@extends('auth.layout-auth')
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
-    <meta name="description" content="Sekolahku adalah aplikasi manajemen sekolah berbasis website yang di bangun dan di kembangkan dengan Framework Laravel">
-    <meta name="keywords" content="">
-    <meta name="author" content="Andri Desmana">
-    <title>Login Page - SekolahKu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
+@section('title', 'Login')
 
-    <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('Assets/Backend/vendors/css/vendors.min.css')}}">
-    <!-- END: Vendor CSS-->
+@section('content')
+<style>
+    .auth-wrapper {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(120deg, #e8f5e9 0%, #4CAF50 100%);
+        height: 100vh;
+        max-height: 100vh;
+    }
 
-    <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('Assets/Backend/css/bootstrap.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('Assets/Backend/css/bootstrap-extended.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('Assets/Backend/css/colors.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('Assets/Backend/css/components.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('Assets/Backend/css/themes/dark-layout.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('Assets/Backend/css/themes/bordered-layout.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('Assets/Backend/css/themes/semi-dark-layout.css')}}">
+    .floating-circle {
+        position: absolute;
+        font-size: 4rem;
+        opacity: 0.4;
+        z-index: 0;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    }
 
-    <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('Assets/Backend/css/core/menu/menu-types/vertical-menu.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('Assets/Backend/css/plugins/forms/form-validation.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('Assets/Backend/css/pages/page-auth.css')}}">
-    <!-- END: Page CSS-->
+    .circle-1 { top: 5%; left: 5%; animation: float 4s ease-in-out infinite; color: #4CAF50; }
+    .circle-2 { top: 15%; left: 35%; animation: float 3.5s ease-in-out infinite 0.2s; color: #81C784; }
+    .circle-3 { top: 35%; left: 15%; animation: float 4.5s ease-in-out infinite 0.4s; color: #66BB6A; }
+    .circle-4 { top: 55%; left: 35%; animation: float 3.8s ease-in-out infinite 0.6s; color: #A5D6A7; }
+    .circle-5 { top: 75%; left: 5%; animation: float 4.2s ease-in-out infinite 0.8s; color: #2E7D32; }
+    .circle-6 { top: 25%; left: 55%; animation: float 3.6s ease-in-out infinite 1s; color: #43A047; }
+    .circle-7 { top: 45%; left: 65%; animation: float 4.1s ease-in-out infinite 1.2s; color: #388E3C; }
+    .circle-8 { top: 65%; left: 55%; animation: float 3.9s ease-in-out infinite 1.4s; color: #1B5E20; }
+    .circle-9 { top: 85%; left: 75%; animation: float 4.3s ease-in-out infinite 1.6s; color: #C8E6C9; }
+    .circle-10 { top: 10%; left: 85%; animation: float 4s ease-in-out infinite 1.8s; color: #81C784; }
+    .circle-11 { top: 30%; left: 80%; animation: float 3.7s ease-in-out infinite 2s; color: #A5D6A7; }
+    .circle-12 { top: 50%; left: 90%; animation: float 4.4s ease-in-out infinite 2.2s; color: #66BB6A; }
+    .circle-13 { top: 70%; left: 85%; animation: float 3.8s ease-in-out infinite 2.4s; color: #4CAF50; }
+    .circle-14 { top: 90%; left: 90%; animation: float 4.2s ease-in-out infinite 2.6s; color: #2E7D32; }
+    .circle-15 { top: 20%; left: 25%; animation: float 3.9s ease-in-out infinite 2.8s; color: #1B5E20; }
 
-</head>
-<!-- END: Head-->
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 0.4;
+        }
+        50% {
+            transform: translateY(-30px) rotate(10deg);
+            opacity: 0.8;
+        }
+    }
 
-<!-- BEGIN: Body-->
+    .auth-inner {
+        position: relative;
+        z-index: 1;
+        background-color: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+        margin: 20px;
+        padding: 20px;
+        height: calc(100vh - 40px);
+        overflow-y: hidden;
+    }
 
-<body class="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="blank-page">
-    <!-- BEGIN: Content-->
-    <div class="app-content content ">
-        <div class="content-overlay"></div>
-        <div class="header-navbar-shadow"></div>
-        <div class="content-wrapper">
-            <div class="content-header row">
-            </div>
-            <div class="content-body">
-                <div class="auth-wrapper auth-v2">
-                    <div class="auth-inner row m-0">
-                        <!-- Brand logo--><a class="brand-logo" href="/">
-                            <svg viewBox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28">
-                                <defs>
-                                    <lineargradient id="linearGradient-1" x1="100%" y1="10.5120544%" x2="50%" y2="89.4879456%">
-                                        <stop stop-color="#000000" offset="0%"></stop>
-                                        <stop stop-color="#FFFFFF" offset="100%"></stop>
-                                    </lineargradient>
-                                    <lineargradient id="linearGradient-2" x1="64.0437835%" y1="46.3276743%" x2="37.373316%" y2="100%">
-                                        <stop stop-color="#EEEEEE" stop-opacity="0" offset="0%"></stop>
-                                        <stop stop-color="#FFFFFF" offset="100%"></stop>
-                                    </lineargradient>
-                                </defs>
-                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g id="Artboard" transform="translate(-400.000000, -178.000000)">
-                                        <g id="Group" transform="translate(400.000000, 178.000000)">
-                                            <path class="text-primary" id="Path" d="M-5.68434189e-14,2.84217094e-14 L39.1816085,2.84217094e-14 L69.3453773,32.2519224 L101.428699,2.84217094e-14 L138.784583,2.84217094e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L6.71554594,44.4188507 C2.46876683,39.9813776 0.345377275,35.1089553 0.345377275,29.8015838 C0.345377275,24.4942122 0.230251516,14.560351 -5.68434189e-14,2.84217094e-14 Z" style="fill: currentColor"></path>
-                                            <path id="Path1" d="M69.3453773,32.2519224 L101.428699,1.42108547e-14 L138.784583,1.42108547e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L32.8435758,70.5039241 L69.3453773,32.2519224 Z" fill="url(#linearGradient-1)" opacity="0.2"></path>
-                                            <polygon id="Path-2" fill="#000000" opacity="0.049999997" points="69.3922914 32.4202615 32.8435758 70.5039241 54.0490008 16.1851325"></polygon>
-                                            <polygon id="Path-21" fill="#000000" opacity="0.099999994" points="69.3922914 32.4202615 32.8435758 70.5039241 58.3683556 20.7402338"></polygon>
-                                            <polygon id="Path-3" fill="url(#linearGradient-2)" opacity="0.099999994" points="101.428699 0 83.0667527 94.1480575 130.378721 47.0740288"></polygon>
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
-                            <h2 class="brand-text text-primary ml-1">SekolahKu</h2>
-                        </a>
-                        <!-- /Brand logo-->
-                        <!-- Left Text-->
-                        <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
-                            <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="{{asset('Assets/Backend/images/illustration/login-v2.svg')}}" alt="Login V2" /></div>
+    .login-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+        overflow: hidden;
+    }
+
+    .btn-primary {
+        background-color: #4CAF50 !important;
+        border-color: #4CAF50 !important;
+    }
+
+    .btn-primary:hover {
+        background-color: #388E3C !important;
+        border-color: #388E3C !important;
+    }
+
+    .text-primary {
+        color: #4CAF50 !important;
+    }
+
+    a {
+        color: #4CAF50;
+    }
+
+    a:hover {
+        color: #388E3C;
+    }
+
+      .img-side {
+        background-image: url('/assets/frontend/img/cover_login.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100%;
+        margin: 0;
+    }
+</style>
+
+<div class="auth-wrapper">
+    <div class="floating-circle circle-1">⚪</div>
+    <div class="floating-circle circle-2">⚪</div>
+    <div class="floating-circle circle-3">⚪</div>
+    <div class="floating-circle circle-4">⚪</div>
+    <div class="floating-circle circle-5">⚪</div>
+    <div class="floating-circle circle-6">⚪</div>
+    <div class="floating-circle circle-7">⚪</div>
+    <div class="floating-circle circle-8">⚪</div>
+    <div class="floating-circle circle-9">⚪</div>
+    <div class="floating-circle circle-10">⚪</div>
+    <div class="floating-circle circle-11">⚪</div>
+    <div class="floating-circle circle-12">⚪</div>
+    <div class="floating-circle circle-13">⚪</div>
+    <div class="floating-circle circle-14">⚪</div>
+    <div class="floating-circle circle-15">⚪</div>
+    <div class="auth-inner">
+        <!-- Login Section -->
+        <div class="col-lg-6 d-flex align-items-center auth-bg">
+            <div class="login-card mx-auto w-100 p-3">
+                <a class="brand-logo d-flex align-items-center" href="/">
+                    <img src="{{ asset('assets/frontend/img/foto_logo.png') }}" alt="Logo" width="50" height="50">
+                    <h2 class="brand-text text-primary ml-1 mb-0">RA Al Barokah</h2>       
+                </a>
+                @if($message = Session::get('error'))
+                    <div class="alert alert-danger">
+                        <div class="alert-body">
+                            <strong>{{ $message }}</strong>
+                            <button type="button" class="close" data-dismiss="alert">×</button>
                         </div>
-                        <!-- /Left Text-->
-                        <!-- Login-->
-                        <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
-                            <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                                @if($message = Session::get('error'))
-                                    <div class="alert alert-danger" role="alert">
-                                        <div class="alert-body">
-                                            <strong>{{ $message }}</strong>
-                                            <button type="button" class="close" data-dismiss="alert">×</button>
-                                        </div>
-                                    </div>
-                                @elseif($message = Session::get('success'))
-                                <div class="alert alert-success" role="alert">
-                                    <div class="alert-body">
-                                        <strong>{{ $message }}</strong>
-                                        <button type="button" class="close" data-dismiss="alert">×</button>
-                                    </div>
-                                </div>
-                                @endif
-                                <h2 class="card-title font-weight-bold mb-1">Welcome to SekolahKu! 👋</h2>
-                                <p class="card-text mb-2">Silakan masuk ke akun Anda dan mulai petualangan</p>
-                                <form class="auth-login-form mt-2" action="{{route('login')}}" method="POST">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label class="form-label" for="login-email">Email</label>
-                                        <input class="form-control @error('email') is-invalid @enderror" id="login-email" type="text" name="email" value=" {{old('email')}} " placeholder="Masukan Email" aria-describedby="login-email" autofocus="" tabindex="1" />
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="d-flex justify-content-between">
-                                            <label for="login-password">Password</label><a href=""><small>Forgot Password?</small></a>
-                                        </div>
-                                        <div class="input-group input-group-merge form-password-toggle">
-                                            <input class="form-control form-control-merge @error('password') is-invalid @enderror" id="login-password" type="password" name="password" placeholder="············" aria-describedby="login-password" tabindex="2" />
-                                            <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="remember-me" type="checkbox" tabindex="3" />
-                                            <label class="custom-control-label" for="remember-me"> Remember Me</label>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary btn-block" tabindex="4">Masuk</button>
-                                </form>
-                                </div>
-                        </div>
-                        <!-- /Login-->
                     </div>
-                </div>
+                @elseif($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <div class="alert-body">
+                            <strong>{{ $message }}</strong>
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                        </div>
+                    </div>
+                @endif
+
+                <h2 class="card-title font-weight-bold mb-1">Welcome to RA Al Barokah! 👋</h2>
+                <p class="card-text mb-2">Silakan masuk ke akun Anda</p>
+
+                <form class="auth-login-form mt-2" action="{{ route('login') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="text" id="login-email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Masukan Email" autofocus>
+                        @error('email')
+                            <span class="invalid-feedback d-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <div class="d-flex justify-content-between">
+                            <label for="login-password">Password</label>
+                            <a href="{{ route('password.request') }}">
+                                <small>Forgot Password?</small>
+                            </a>
+                        </div>                        
+                        <div class="input-group input-group-merge form-password-toggle">
+                            <input type="password" id="login-password" class="form-control form-control-merge @error('password') is-invalid @enderror" name="password" placeholder="············">
+                            <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
+                        </div>
+                        @error('password')
+                            <span class="invalid-feedback d-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group form-check">
+                        <input class="form-check-input" id="remember-me" type="checkbox">
+                        <label class="form-check-label" for="remember-me">Ingat Saya</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Masuk</button>
+                </form>
+
+                <p class="text-center mt-2">
+                    Belum punya akun? <a href="{{ route('register') }}">Daftar Sekarang</a>
+                </p>
             </div>
         </div>
+        <!-- /Login Section -->
+
+        <!-- Animated Background Section -->
+        <div class="col-lg-6 img-side d-none d-lg-flex">
+        </div>
+        <!-- /Animated Background Section -->
     </div>
-    <!-- END: Content-->
-
-
-    <!-- BEGIN: Vendor JS-->
-    <script src="{{asset('Assets/Backend/vendors/js/vendors.min.js')}}"></script>
-    <!-- BEGIN Vendor JS-->
-
-    <!-- BEGIN: Page Vendor JS-->
-    <script src="{{asset('Assets/Backend/vendors/js/forms/validation/jquery.validate.min.js')}}"></script>
-    <!-- END: Page Vendor JS-->
-
-    <!-- BEGIN: Theme JS-->
-    <script src="{{asset('Assets/Backend/js/core/app-menu.js')}}"></script>
-    <script src="{{asset('Assets/Backend/js/core/app.js')}}"></script>
-    <!-- END: Theme JS-->
-
-    <!-- BEGIN: Page JS-->
-    <script src="{{asset('Assets/Backend/js/scripts/pages/page-auth-login.js')}}"></script>
-    <!-- END: Page JS-->
-
-    <script>
-        $(window).on('load', function() {
-            if (feather) {
-                feather.replace({
-                    width: 14,
-                    height: 14
-                });
-            }
-        })
-    </script>
-</body>
-<!-- END: Body-->
-
-</html>
+</div>
+@endsection

@@ -16,8 +16,6 @@ class CreateDataJurusansTable extends Migration
         Schema::create('data_jurusans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('jurusan_id');
-            $table->string('image');
-            $table->text('content');
             $table->timestamps();
 
             $table->foreign('jurusan_id')->references('id')->on('jurusans')->onDelete('cascade')->onUpdate('cascade');

@@ -10,13 +10,14 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\PPDB\Http\Requests\RegisterRequest;
+use Modules\PPDB\Entities\PpdbSetting;
 use Session;
 use DB;
 
 class AuthController extends Controller
 {
     use RegistersUsers;
-
+    
     /**
      * Where to redirect users after registration.
      *
@@ -28,23 +29,36 @@ class AuthController extends Controller
     {
         $this->middleware('guest');
     }
-
+    
     // Register View
     public function registerView()
     {
+        // Check if PPDB registration is open
+        if (!PpdbSetting::isOpen()) {
+            return view('ppdb::auth.closed', [
+                'message' => PpdbSetting::getClosedMessage()
+            ]);
+        }
+        
         return view('ppdb::auth.register');
     }
-
+    
     // Register Store
     public function registerStore(RegisterRequest $request)
     {
+        // Check if PPDB registration is open
+        if (!PpdbSetting::isOpen()) {
+            Session::flash('error', PpdbSetting::getClosedMessage());
+            return redirect()->back();
+        }
+        
         try {
             DB::beginTransaction();
 
            // Pilih kalimat
            $kalimatKe  = "1";
            $username   = implode(" ", array_slice(explode(" ", $request->name), 0, $kalimatKe)); // ambil kalimat
-
+           
             $register = new User();
             $register->name      = $request->name;
             $register->username  = $username;
@@ -57,12 +71,12 @@ class AuthController extends Controller
                 $murid = new dataMurid();
                 $murid->user_id         =   $register->id;
                 $murid->whatsapp        =   $request->whatsapp;
-                $murid->asal_sekolah    =   $request->asal_sekolah;
+                $murid->jenis_kelamin    =   $request->jenis_kelamin;
                 $murid->save();
             }
 
             $register->assignRole($register->role);
-
+            
             DB::commit();
             Session::flash('success','Success, Data Berhasil dikirim !');
             return redirect()->route('login');

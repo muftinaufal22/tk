@@ -44,9 +44,17 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="basicInput">Nama Jadwal Pelajaran </label> <span class="text-danger">*</span>
-                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" placeholder="Nama Jadwal Pelajaran" />
-                                        @error('nama')
+                                        <label for="basicInput">Hari</label> <span class="text-danger">*</span>
+                                        <select class="form-control @error('hari') is-invalid @enderror" name="hari">
+                                            <option value="">Pilih Hari</option>
+                                            <option value="Senin">Senin</option>
+                                            <option value="Selasa">Selasa</option>
+                                            <option value="Rabu">Rabu</option>
+                                            <option value="Kamis">Kamis</option>
+                                            <option value="Jumat">Jumat</option>
+                                            <option value="Sabtu">Sabtu</option>
+                                        </select>
+                                        @error('hari')
                                             <div class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
                                             </div>
@@ -56,42 +64,67 @@
     
                                 <div class="col-3">
                                     <div class="form-group">
-                                        <label for="basicInput">Singkatan</label> <span class="text-danger">*</span>
-                                        <input type="text" class="form-control @error('singkatan') is-invalid @enderror" name="singkatan" placeholder="Singkatan" />
-                                        @error('singkatan')
+                                        <label for="basicInput">Waktu</label> <span class="text-danger">*</span>
+                                        <input type="time" class="form-control @error('jam_mulai') is-invalid @enderror" name="jam_mulai" placeholder="Jam Mulai" />
+                                        <input type="time" class="form-control mt-1 @error('jam_selesai') is-invalid @enderror" name="jam_selesai" placeholder="Jam Selesai" />                                        
+                                        @error('jam_mulai')
                                             <div class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
                                             </div>
                                         @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <label for="basicInput">Gambar</label> <span class="text-danger">*</span>
-                                        <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" placeholder="image" />
-                                        @error('image')
+                                        @error('jam_selesai')
                                             <div class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
                                             </div>
-                                        @enderror
+                                        @enderror                                    
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="basicInput">Deskripsi</label> <span class="text-danger">*</span>
-                                        <textarea name="content" class="form-control  @error('content') is-invalid @enderror" cols="30" rows="10"></textarea>
-                                        @error('content')
+                                        <label for="basicInput">Mata Pelajaran</label> <span class="text-danger">*</span>
+                                        <textarea name="pelajaran" class="form-control  @error('pelajaran') is-invalid @enderror" cols="30" rows="10"></textarea>
+                                        @error('pelajaran')
                                             <div class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
                                             </div>
                                         @enderror
                                     </div>
                                 </div>
-                              
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="basicInput">Kelas</label> <span class="text-danger">*</span>
+                                        <select name="kelas" class="form-control @error('kelas') is-invalid @enderror">
+                                            <option value="">-- Pilih --</option>
+                                            @foreach($kelas as $k)
+                                                <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('kelas')
+                                            <div class="invalid-feedback">
+                                            <strong>{{ $message }}</strong>
+                                            </div>
+                                        @enderror                                 
+                                       </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="basicInput">Status</label> <span class="text-danger">*</span>
+                                        <select class="form-control @error('is_active') is-invalid @enderror" name="is_active">
+                                            <option value="1">Aktif</option>
+                                            <option value="0">Tidak Aktif</option>
+                                        </select>
+                                        @error('is_active')
+                                            <div class="invalid-feedback">
+                                            <strong>{{ $message }}</strong>
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
-                            <button class="btn btn-primary" type="submit">Update</button>
-                            <a href="{{route('program-studi.index')}}" class="btn btn-warning">Batal</a>
+                            <div class="text-right">
+                                <a href="{{route('program-studi.index')}}" class="btn btn-warning">Batal</a>
+                                <button class="btn btn-primary" type="submit">Tambah</button>
+                            </div>
                         </form>
                     </div>
                 </div>

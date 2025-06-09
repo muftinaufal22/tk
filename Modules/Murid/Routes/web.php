@@ -12,12 +12,10 @@
 */
 
 use Illuminate\Support\Facades\Route;
-
-Route::prefix('murid')->middleware('role:Murid','auth')->group(function() {
+Route::prefix('murid')->middleware(['auth', 'role:Murid'])->group(function() {
     Route::get('/', 'MuridController@index');
 
     Route::resources([
-      'perpustakaan'  => PerpustakaanController::class,
       'pembayaran'    => PembayaranController::class
     ]);
 });

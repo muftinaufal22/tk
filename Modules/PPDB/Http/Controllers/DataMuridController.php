@@ -84,8 +84,8 @@ class DataMuridController extends Controller
         try {
             DB::beginTransaction();
             $validator = FacadesValidator::make($request->all(), [
-                'nis'   => 'required|numeric|unique:data_murids',
-                'nisn'  => 'required|numeric|unique:data_murids',
+                'nis'   => 'nullable|numeric|unique:data_murids',
+                'nisn'  => 'nullable|numeric|unique:data_murids',
             ],
             [
                 'nis.required'      => 'NIS tidak boleh kosong.',
@@ -137,9 +137,46 @@ class DataMuridController extends Controller
      * @return Renderable
      */
     public function destroy($id)
-    {
-        //
+{
+    try {
+        DB::beginTransaction();
+
+        $murid = User::findOrFail($id);
+
+        // Hapus relasi jika ada
+        if ($murid->muridDetail) {
+            $murid->muridDetail->delete();
+        }
+
+        if ($murid->dataOrtu) {
+            $murid->dataOrtu->delete();
+        }
+
+        if ($murid->berkas) {
+            $murid->berkas->delete();
+        }
+
+        // Hapus data murid
+        dataMurid::where('user_id', $murid->id)->delete();
+
+        // Hapus foto profil jika ada
+        if ($murid->foto_profile && \Storage::exists('public/images/profile/' . $murid->foto_profile)) {
+            \Storage::delete('public/images/profile/' . $murid->foto_profile);
+        }
+
+        // Hapus user utama
+        $murid->delete();
+
+        DB::commit();
+        Session::flash('success', 'Calon murid berhasil dihapus!');
+        return redirect()->route('data-murid.index');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        Session::flash('error', 'Gagal menghapus murid: ' . $e->getMessage());
+        return redirect()->route('data-murid.index');
     }
+}
 
     // Create Data Payment
     public function payment($murid)

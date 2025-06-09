@@ -15,9 +15,10 @@ class CreateJurusansTable extends Migration
     {
         Schema::create('jurusans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama')->unique();
-            $table->string('singkatan')->unique()->nullable();
-            $table->string('slug')->unique();
+            $table->string('hari');
+            $table->time('jam_mulai');
+            $table->time('jam_selesai');
+            $table->text('pelajaran');
             $table->enum('is_active',[0,1])->default(0);
             $table->timestamps();
         });

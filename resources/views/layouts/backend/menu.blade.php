@@ -52,11 +52,12 @@
                             <span class="menu-item text-truncate" data-i18n="Basic">jadwal Pelajaran</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ (request()->is('backend-kegiatan')) ? 'active' : '' }}">
-                        <a class="d-flex align-items-center" href=" {{route('backend-kegiatan.index')}} "><i data-feather="circle"></i>
-                            <span class="menu-item text-truncate" data-i18n="Basic">Kegiatan</span>
+                    <li class="nav-item {{ (request()->is('backend-event')) ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href=" {{route('backend-event.index')}} "><i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Basic">Event</span>
                         </a>
                     </li>
+    
                     <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Second Level">Tentang</span></a>
                         <ul class="menu-content">
                             <li class="nav-item {{ (request()->is('backend-profile-sekolah')) ? 'active' : '' }}">
@@ -75,14 +76,14 @@
                 </a>
                 <ul class="menu-content">
                     </li>
-                    <li class="nav-item {{ (request()->is('backend-event')) ? 'active' : '' }}">
-                        <a class="d-flex align-items-center" href=" {{route('backend-event.index')}} "><i data-feather="circle"></i>
-                            <span class="menu-item text-truncate" data-i18n="Basic">Kegiatan</span>
+                     <li class="nav-item {{ (request()->is('backend-kegiatan')) ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href=" {{route('backend-kegiatan.index')}} "><i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Basic"> Dokumentasi</span>
                         </a>
                     </li>
                 </ul>
             </li>
-            <li class=" nav-item">
+            <!-- <li class=" nav-item">
                 <a class="d-flex align-items-center" href="#"><i data-feather="globe"></i>
                     <span class="menu-title text-truncate" data-i18n="Card">Website</span>
                 </a>
@@ -110,7 +111,7 @@
                     </li>
 
                 </ul>
-            </li>
+            </li> -->
 
             <li class=" nav-item">
                 <a class="d-flex align-items-center" href="#"><i data-feather="users"></i>
@@ -141,28 +142,61 @@
                     <span class="menu-title text-truncate" data-i18n="Data Calon Murid">Data Calon Murid</span>
                 </a>
             </li>
- 
+
+            <li class="nav-item {{ (request()->is('ppdb/buka-tutup-ppd')) ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href="{{ route('ppd.index') }}">
+                    <i data-feather="lock"></i>
+                    <span class="menu-title text-truncate" data-i18n="Buka Tutup PPDB">Buka Tutup PPDB</span>
+                </a>
+            </li>
+                
+        <li class="nav-item {{ (request()->is('settings/spp/murid')) ? 'active' : '' }}">
+            @role('Admin')
+                <a class="d-flex align-items-center" href="{{ route('settings') }}">
+                    <i data-feather="credit-card" class="mr-50"></i>
+                    <span class="menu-title text-truncate" data-i18n="Pembayaran">Setting SPP</span>
+                </a>
+            @endrole
+        </li>
+
 
             {{-- MENU GURU --}}
-            @elseif(Auth::user()->role == 'Guru')
-            <li class=" nav-item">
-                <a class="d-flex align-items-center" href="#"><i data-feather="credit-card"></i>
-                    <span class="menu-title text-truncate" data-i18n="Card">Data Murid</span>
-                </a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="d-flex align-items-center" href=""><i data-feather="circle"></i>
-                            <span class="menu-item text-truncate" data-i18n="Basic">Kelas A</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="d-flex align-items-center" href=""><i data-feather="circle"></i>
-                            <span class="menu-item text-truncate" data-i18n="Basic">Kelas B</span>
-                        </a>
-                    </li>
-                  
-                </ul>
-            </li>
+@elseif(Auth::user()->role == 'Guru')
+<li class="nav-item">
+    <a class="d-flex align-items-center" href="#"><i data-feather="credit-card"></i>
+        <span class="menu-title text-truncate" data-i18n="Card">Data Kelas</span>
+    </a>
+    <ul class="menu-content">
+        <li>
+            <a class="d-flex align-items-center" href="{{route('muridA')}}"><i data-feather="circle"></i>
+                <span class="menu-item text-truncate" data-i18n="Basic">Kelas A</span>
+            </a>
+        </li>
+        <li>
+            <a class="d-flex align-items-center" href="{{route('muridB')}}"><i data-feather="circle"></i>
+                <span class="menu-item text-truncate" data-i18n="Basic">Kelas B</span>
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li class="nav-item">
+    <a class="d-flex align-items-center" href="#"><i data-feather="credit-card"></i>
+        <span class="menu-title text-truncate" data-i18n="Card">Jadwal Pelajaran</span>
+    </a>
+    <ul class="menu-content">
+        <li>
+            <a class="d-flex align-items-center" href="{{route('kelasA')}}"><i data-feather="circle"></i>
+                <span class="menu-item text-truncate" data-i18n="Basic">Kelas A</span>
+            </a>
+        </li>
+        <li>
+            <a class="d-flex align-items-center" href="{{route('kelasB')}}"><i data-feather="circle"></i>
+                <span class="menu-item text-truncate" data-i18n="Basic">Kelas B</span>
+            </a>
+        </li>
+    </ul>
+</li>
 
             {{-- MENU GUEST --}}
             @elseif(Auth::user()->role == 'Guest')
@@ -180,52 +214,42 @@
                 </a>
             </li>
 
-            {{-- MENU PERPUSTAKAAN --}}
-             @elseif(Auth::user()->role == 'Perpustakaan')
-              <li class="nav-item {{ (request()->is('perpus/books')) ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href=" {{route('books.index')}} "><i data-feather="book"></i>
-                    <span class="menu-title text-truncate" data-i18n="Books">Books</span>
-                </a>
-              </li>
-              <li class="nav-item {{ (request()->is('perpus/kategori')) ? 'active' : '' }}">
-                 <a class="d-flex align-items-center" href=" {{route('kategori.index')}} "><i data-feather="list"></i>
-                    <span class="menu-title text-truncate" data-i18n="Category">Category</span>
-                </a>
-              </li>
-              <li class="nav-item {{ (request()->is('perpus/member')) ? 'active' : '' }}">
-                 <a class="d-flex align-items-center" href=" {{route('member.index')}} "><i data-feather="users"></i>
-                    <span class="menu-title text-truncate" data-i18n="Members">Members</span>
-                </a>
-              </li>
-              <li class="nav-item {{ (request()->is('perpus/publisher')) ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('publisher.index')}}"><i data-feather="user"></i>
-                    <span class="menu-title text-truncate" data-i18n="Publisher">Publisher</span>
-                </a>
-              </li>
-              <li class="nav-item {{ (request()->is('books/author')) ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('author.index')}}"><i data-feather="user-check"></i>
-                    <span class="menu-title text-truncate" data-i18n="Authors">Authors</span>
-                </a>
-              </li>
-              <li class="nav-item {{ (request()->is('perpus/peminjam')) ? 'active' : '' }}">
-                 <a class="d-flex align-items-center" href="{{route('peminjam.index')}}"><i data-feather="briefcase"></i>
-                    <span class="menu-title text-truncate" data-i18n="Members">Peminjam</span>
-                </a>
-              </li>
+           
+
+              
 
             {{-- MENU MURID --}}
             @elseif(Auth::user()->role == 'Murid')
-              <!-- <li class="nav-item {{ (request()->is('murid/perpustakaan')) ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href=" {{route('perpustakaan.index')}} "><i data-feather="book"></i>
-                    <span class="menu-title text-truncate" data-i18n="Books">Perpustakaan</span>
-                </a>
-              </li> -->
-              <!-- <li class="nav-item {{ (request()->is('murid/pembayaran')) ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href=" {{route('pembayaran.index')}} "><i data-feather="dollar-sign"></i>
+             
+              <li class="nav-item {{ (request()->is('murid/pembayaran*')) ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href="{{ route('pembayaran.index') }}"><i data-feather="dollar-sign"></i>
                     <span class="menu-title text-truncate" data-i18n="Books">Pembayaran</span>
                 </a>
-              </li> -->
-
+              </li>
+      <li class="nav-item">
+    <a class="d-flex align-items-center" href="#"><i data-feather="credit-card"></i>
+        <span class="menu-title text-truncate" data-i18n="Card">Jadwal Pelajaran</span>
+    </a>
+    <ul class="menu-content">
+        @if(Auth::user()->kelas_id == '1')
+        <li>
+            <a class="d-flex align-items-center" href="{{ route('murid.jurusan', ['kelas_id' => 1]) }}"><i data-feather="circle"></i>
+                <span class="menu-item text-truncate" data-i18n="Basic">Kelas A</span>
+            </a>
+        </li>
+        @elseif(Auth::user()->kelas_id == '2')
+        <li>
+            <a class="d-flex align-items-center" href="{{ route('murid.jurusan', ['kelas_id' => 2]) }}"><i data-feather="circle"></i>
+                <span class="menu-item text-truncate" data-i18n="Basic">Kelas B</span>
+            </a>
+        </li>
+        @else
+        <li>
+            <span class="menu-item text-truncate text-muted">Kelas tidak dikenal</span>
+        </li>
+        @endif
+    </ul>
+</li>
             {{-- MENU BENDAHARA --}}
             @elseif(Auth::user()->role == 'Bendahara')
               <li class="nav-item {{ (request()->is('spp/murid')) ? 'active' : '' }}">

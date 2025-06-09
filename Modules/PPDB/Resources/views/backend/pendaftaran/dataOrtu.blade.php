@@ -40,17 +40,6 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="basicInput">No Telp Ayah</label>
-                                        <input type="text" class="form-control @error('telp_ayah') is-invalid @enderror" name="telp_ayah" value=" {{old('telp_ayah')}} " placeholder="telp Ayah" />
-                                        @error('telp_ayah')
-                                            <div class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
                                         <label for="basicInput">Pendidikan Ayah</label>
                                         <select name="pendidikan_ayah" class="form-control">
                                             <option value="">-- Pilih --</option>
@@ -113,15 +102,6 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="basicInput">No Telp Ibu</label>
-                                        <input type="text" class="form-control @error('telp_ibu') is-invalid @enderror" name="telp_ibu" value=" {{old('telp_ibu')}} " placeholder="telp Ibu" />
-                                        @error('telp_ibu')
-                                            <div class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                            </div>
-                                        @enderror
-                                    </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
@@ -172,8 +152,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary" type="submit">Simpan</button>
-                            <a href="/home" class="btn btn-warning">Batal</a>
+                            <div class="text-right mt-2">
+                                <a href="{{ url()->current() }}" class="btn btn-warning">Kembali</a>
+                                <button class="btn btn-primary" type="submit">Simpan</button>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -19,10 +19,9 @@ class DataMuridRequest extends FormRequest
             'tempat_lahir'  => 'required',
             'tgl_lahir'     => 'required',
             'agama'         => 'required',
-            'telp'          => 'required|numeric',
             'whatsapp'      => 'required|numeric',
             'alamat'        => 'required',
-            'asal_sekolah'  => 'required'
+            'jenis_kelamin'  => 'required'
         ];
     }
 
@@ -35,12 +34,10 @@ class DataMuridRequest extends FormRequest
             'tempat_lahir.required'  => 'Tempat Lahir tidak boleh kosong.',
             'tgl_lahir.required'     => 'Tanggal Lahir tidak boleh kosong.',
             'agama.required'         => 'Agama tidak boleh kosong.',
-            'telp.required'          => 'No Telp tidak boleh kosong.',
-            'telp.numeric'           => 'No Telp hanya mendukung angka.',
             'whatsapp.required'      => 'No WhatsApp tidak boleh kosong.',
             'whatsapp.numeric'       => 'No WhatsApp hanya mendukung angka.',
             'alamat.required'        => 'Alamat tidak boleh kosong.',
-            'asal_sekolah.required'  => 'Asal Sekolah tidak boleh kosong.'
+            'jenis_kelamin.required'  => 'jenis kelamin tidak boleh kosong.'
         ];
     }
 

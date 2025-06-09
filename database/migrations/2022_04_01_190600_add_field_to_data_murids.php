@@ -14,7 +14,7 @@ class AddFieldToDataMurids extends Migration
     public function up()
     {
         Schema::table('data_murids', function (Blueprint $table) {
-            $table->enum('proses',['Pendaftaran','Berkas','Murid','Ditolak'])->after('asal_sekolah')->default('Pendaftaran');
+            $table->enum('proses',['Pendaftaran','Berkas','Murid','Ditolak'])->after('jenis_kelamin')->default('Pendaftaran');
         });
     }
 

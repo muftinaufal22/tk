@@ -2,10 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
@@ -20,11 +17,11 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/home';
 
     /**
-     * The controller namespace for the application.
+     * This namespace is applied to your controller routes.
      *
-     * When present, controller route declarations will automatically be prefixed with this namespace.
+     * In addition, it is set as the URL generator's root namespace.
      *
-     * @var string|null
+     * @var string
      */
     protected $namespace = 'App\Http\Controllers';
 
@@ -46,6 +43,10 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
+                
+            // Load PPD routes
+            Route::middleware('web')
+                ->group(base_path('routes/ppd.php'));
         });
     }
 
@@ -56,8 +57,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting()
     {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
-        });
+        // Configure rate limiting if needed
     }
 }

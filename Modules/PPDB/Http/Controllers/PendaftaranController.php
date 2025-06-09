@@ -47,7 +47,7 @@ class PendaftaranController extends Controller
                 $murid->telp            = $request->telp;
                 $murid->whatsapp        = $request->whatsapp;
                 $murid->alamat          = $request->alamat;
-                $murid->asal_sekolah    = $request->asal_sekolah;
+                $murid->jenis_kelamin    = $request->jenis_kelamin;
                 $murid->update();
 
                 if ($murid) {
@@ -140,20 +140,20 @@ class PendaftaranController extends Controller
     
             $imageKk = $request->file('kartu_keluarga');
             $kartuKeluarga = time() . "_" . $imageKk->getClientOriginalName();
-            $tujuan_upload = 'public/images/berkas_murid';
-            $imageKk->storeAs($tujuan_upload, $kartuKeluarga);
+            $tujuan_upload = 'storage/images/berkas_murid';
+            $imageKk->storeAs('public/images/berkas_murid', $kartuKeluarga);
     
-            $imageakte = $request->file('kartu_keluarga'); // kemungkinan typo, ganti ke 'akte_kelahiran' kalau beda file
+            $imageakte = $request->file('akte_kelahiran');
             $akteKelahiran = time() . "_" . $imageakte->getClientOriginalName();
-            $imageakte->storeAs($tujuan_upload, $akteKelahiran);
+            $imageakte->storeAs('public/images/berkas_murid', $akteKelahiran);
     
             $imagektp = $request->file('ktp');
             $ktp = time() . "_" . $imagektp->getClientOriginalName();
-            $imagektp->storeAs($tujuan_upload, $ktp);
+            $imagektp->storeAs('public/images/berkas_murid', $ktp);
     
             $imagefoto = $request->file('foto');
             $foto = time() . "_" . $imagefoto->getClientOriginalName();
-            $imagefoto->storeAs($tujuan_upload, $foto);
+            $imagefoto->storeAs('public/images/berkas_murid', $foto);
     
             $berkas = BerkasMurid::find($id);
             $berkas->kartu_keluarga  = $kartuKeluarga;
@@ -168,8 +168,7 @@ class PendaftaranController extends Controller
         } catch (ErrorException $e) {
             DB::rollback();
             throw new ErrorException($e->getMessage());
-        }
-    }
+        }    }
     
 
 }

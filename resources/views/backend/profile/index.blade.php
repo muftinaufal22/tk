@@ -80,7 +80,8 @@
                                                 @if (Auth::user()->foto_profile == NULL)
                                                     <img class="round" src="{{asset('Assets/Backend/images/user.png')}}" alt="avatar" height="80" width="80">
                                                 @else
-                                                    <img src="{{asset('storage/images/profile/' .$profile->foto_profile)}}" id="account-upload-img" class="rounded mr-50" alt="profile image" height="80" width="80" />
+                                                  
+
                                                 @endif
                                             </a>
                                         </div>
@@ -96,12 +97,12 @@
                                                         <label for="account-nama">Nama</label>
                                                         <input type="text" class="form-control" name="name" placeholder="Nama" value="{{$profile->name}}" />
                                                     </div>
-                                                </div>
+                                                <!-- </div>
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-group">
                                                         <label for="account-username">Username</label>
                                                         <input type="text" class="form-control" name="username" placeholder="Username" value="{{$profile->username}}" />
-                                                    </div>
+                                                    </div> -->
                                                 </div>
 
                                                 <div class="col-12 col-sm-6">
@@ -117,7 +118,7 @@
                                                         <span class="text-danger" style="font-size: 10px">Kosongkan jika tidak ingin mengubah.</span>
                                                     </div>
                                                 </div>
-                                                @if ($profile->email_verified_at == NULL)
+                                                <!-- @if ($profile->email_verified_at == NULL)
                                                     <div class="col-12 mt-75">
                                                         <div class="alert alert-warning mb-50" role="alert">
                                                             <h4 class="alert-heading">Email belum dikonfirmasi. Silakan periksa kotak masuk.</h4>
@@ -126,7 +127,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endif
+                                                @endif -->
                                                 <div class="col-12">
                                                     <button type="submit" class="btn btn-primary mt-2 mr-1">Update</button>
                                                     <a href="/home" class="btn btn-outline-secondary mt-2">Batal</a>

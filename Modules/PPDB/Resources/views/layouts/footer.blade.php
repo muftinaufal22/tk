@@ -1,80 +1,78 @@
-<!-- <div class="footer-area-top">
+<div class="footer-area-top" style="background-color: #005642; color: white; padding: 50px 0;">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="footer-box">
-                    <a href="/">
-                        @if (@$footer->logo == NULL)
-                            <img class="img-responsive" src="{{asset('Assets/Frontend/img/logo-footer.png')}}" alt="logo">
-                        @else
-                            <img class="img-responsive" src="{{asset('storage/images/logo/' .$footer->logo)}}" alt="logo">
-                        @endif
-                    </a>
-                    <div class="footer-about">
-                        <p> {{@$footer->desc}} </p>
-                    </div>
-                    <ul class="footer-social">
-                        <li><a href="{{'https://www.linkedin.com/in',@$footer->linkedln}}" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                        <li><a href="{{'https://www.twitter.com/',@$footer->twitter}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="{{'https://www.facebook.com/',@$footer->facebook}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="{{'https://www.instagram.com/',@$footer->instagram}}" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                    </ul>
+
+            <!-- Kantor Kami -->
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <h3>RA Al BArokah</h3>
+                <p><i class="fa fa-map-marker"></i> Jln. kh.hasyim Ashari Rt02 Rw02 Dusun Krajan Desa Temuasri Kecamatan Sempu</p>
+                <p><i class="fa fa-phone"></i> 081336332888</p>
+                <p><i class="fa fa-envelope"></i> Raalbarokah@gmail.com</p>
+                <div class="social-icons mt-3">
+                    <a href="#"><i class="fa fa-instagram fa-2x"></i></a>
+                    <a href="#"><i class="fa fa-facebook fa-2x"></i></a>
+                    <a href="#"><i class="fa fa-youtube fa-2x"></i></a>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="footer-box">
-                    <h3>Informasi</h3>
-                    <ul class="corporate-address">
-                        <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:{{@$footer->telp}}"> {{@$footer->telp}}</a></li>
-                        <li><i class="fa fa-envelope-o" aria-hidden="true"></i>{{@$footer->email}}</li>
-                    </ul>
-                    <div class="newsletter-area">
-                        <h3>Ingin mendapat berita terupdate ?</h3>
-                        <div class="input-group stylish-input-group">
-                            <input type="text" placeholder="Masukan email kamu disini" class="form-control">
-                            <span class="input-group-addon">
-                                    <button type="submit">
-                                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                                    </button>
-                                </span>
-                        </div>
-                    </div>
-                </div>
+
+            <!-- Jam Kerja -->
+            <div class="col-lg-2 col-md-6 col-sm-12 mb-4">
+                <h3>Jam Kerja</h3>
+                <p>Senin - Jumat<br><strong>07:00 - 11:00</strong></p>
+                <p>Sabtu<br><strong>07:00 - 10:30</strong></p>
+                <p>Minggu<br><strong>Tutup</strong></p>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="footer-box">
-                    <h3>Photos</h3>
-                    <ul class="flickr-photos">
-                        <li>
-                            <a href="#"><img class="img-responsive" src="{{asset('Assets/Frontend/img/footer/1.jpg')}}" alt="flickr"></a>
-                        </li>
-                        <li>
-                            <a href="#"><img class="img-responsive" src="{{asset('Assets/Frontend/img/footer/2.jpg')}}" alt="flickr"></a>
-                        </li>
-                        <li>
-                            <a href="#"><img class="img-responsive" src="{{asset('Assets/Frontend/img/footer/3.jpg')}}" alt="flickr"></a>
-                        </li>
-                        <li>
-                            <a href="#"><img class="img-responsive" src="{{asset('Assets/Frontend/img/footer/4.jpg')}}" alt="flickr"></a>
-                        </li>
-                        <li>
-                            <a href="#"><img class="img-responsive" src="{{asset('Assets/Frontend/img/footer/5.jpg')}}" alt="flickr"></a>
-                        </li>
-                        <li>
-                            <a href="#"><img class="img-responsive" src="{{asset('Assets/Frontend/img/footer/6.jpg')}}" alt="flickr"></a>
-                        </li>
-                    </ul>
-                </div>
+
+            <!-- Google Maps -->
+            <div class="col-lg-4 col-md-12 col-sm-12 mb-4">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.704010145213!2d113.67922981480272!3d-8.159586779310086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd696d9e5be0b7b%3A0x9be290b6d1d9934a!2sM5W9%2BM5C%2C%20Dusun%20Awu%20Awu%2C%20Temuasri%2C%20Kec.%20Sempu%2C%20Kabupaten%20Banyuwangi%2C%20Jawa%20Timur%2068468!5e0!3m2!1sen!2sid!4v1684433232224!5m2!1sen!2sid"
+                    width="100%" 
+                    height="250" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
             </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-2 col-md-6 col-sm-12 mb-4">
+                <h3>Quick Links</h3>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li><a href="#" style="color:white;"><i class="fa fa-angle-right"></i> RA Al Barokah</a></li>
+                    <li><a href="#" style="color:white;"><i class="fa fa-angle-right"></i> PPDB</a></li>
+                    <li><a href="#" style="color:white;"><i class="fa fa-angle-right"></i> Login</a></li>
+                </ul>
+            </div>
+
         </div>
     </div>
 </div>
-<div class="footer-area-bottom">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                
-            </div>
-        </div>
-    </div>
-</div> -->
+<a href="https://wa.me/6281336332888" class="whatsapp-button" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    Hubungi Kami
+</a>
+
+<style>
+    .whatsapp-button {
+        display: inline-flex;
+        align-items: center;
+        background-color: #25D366;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+    .whatsapp-button img {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+    }
+</style>

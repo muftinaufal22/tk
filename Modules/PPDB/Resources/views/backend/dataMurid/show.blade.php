@@ -15,7 +15,7 @@
         <div class="content-header-left col-md-9 col-12 mb-2">
             <div class="row breadcrumbs-top">
                 <div class="col-12">
-                    <h2>Form Pendaftaran PPDB SMK Yadika Natar</h2>
+                    <h2>Form Pendaftaran PPDB RA Al Barokah</h2>
                 </div>
             </div>
         </div>
@@ -57,29 +57,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="basicInput">NIS</label>
-                                        <input type="text" class="form-control @error('nis') is-invalid @enderror" name="nis" value=" {{$murid->muridDetail->nis}} " />
-                                        @error('nis')
-                                            <div class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="basicInput">NISN</label>
-                                        <input type="text" class="form-control @error('nisn') is-invalid @enderror" name="nisn" value=" {{$murid->muridDetail->nisn}} " />
-                                        @error('nisn')
-                                            <div class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
+                               
 
                                 <div class="col-6">
                                     <div class="form-group">
@@ -105,17 +83,6 @@
                                     </div>
                                 </div>
 
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="basicInput">No Telp</label>
-                                        <input type="text" class="form-control @error('telp') is-invalid @enderror" name="telp" value=" {{$murid->muridDetail->telp}} "disabled/>
-                                        @error('telp')
-                                            <div class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
@@ -151,9 +118,9 @@
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="basicInput">Asal Sekolah</label>
-                                        <input type="text" class="form-control @error('asal_sekolah') is-invalid @enderror" name="asal_sekolah" value=" {{$murid->muridDetail->asal_sekolah}} " disabled/>
-                                        @error('asal_sekolah')
+                                        <label for="basicInput">jenis_kelamin</label>
+                                        <input type="text" class="form-control @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin" value=" {{$murid->muridDetail->jenis_kelamin}} " disabled/>
+                                        @error('jenis_kelamin')
                                             <div class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
                                             </div>
@@ -187,17 +154,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="basicInput">No Telp Ayah</label>
-                                        <input type="text" class="form-control @error('telp_ayah') is-invalid @enderror" name="telp_ayah" value=" {{$murid->dataOrtu->telp_ayah}} " placeholder="telp Ayah" disabled />
-                                        @error('telp_ayah')
-                                            <div class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
+                                
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="basicInput">Pendidikan Ayah</label>
@@ -261,17 +218,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="basicInput">No Telp Ibu</label>
-                                        <input type="text" class="form-control @error('telp_ibu') is-invalid @enderror" name="telp_ibu" value=" {{$murid->dataOrtu->telp_ibu}} " placeholder="telp Ibu" disabled />
-                                        @error('telp_ibu')
-                                            <div class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
+                              
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="basicInput">Pendidikan Ibu</label>
@@ -327,18 +274,18 @@
                                 <div class="col-6">
                                     <ul>
                                       <li>Kartu Keluarga
-                                        <a href="{{asset('storage/images/berkas_murid/' .$murid->berkas->kartu_keluarga)}}" target="_blank" class="badge badge-info {{$murid->berkas->kartu_keluarga == NULL ? 'hidden' : ''}}">view</a>
+                                        <a href="{{asset('storage/images/berkas_murid/' .rawurlencode($murid->berkas->kartu_keluarga))}}" target="_blank" class="badge badge-info {{$murid->berkas->kartu_keluarga == NULL ? 'hidden' : ''}}">view</a>
                                       </li>
                                       <li>Akte Kelahiran
-                                      <a href="{{asset('storage/images/berkas_murid/' .$murid->berkas->akte_kelahiran)}}" target="_blank" class="badge badge-info {{$murid->berkas->akte_kelahiran == NULL ? 'hidden' : ''}} ">view</a>
+                                      <a href="{{asset('storage/images/berkas_murid/' .$murid->berkas->akte_kelahiran)}}" target="_blank" class="badge badge-info {{$murid->berkas->akte_kelahiran == NULL ? 'hidden' : ''}}  ">view</a>
                                     </li>
                                       
                                     </ul>
-                                </div>
-                                <div class="col-6">
+                                </div>                         
+                                       <div class="col-6">
                                   <ul>
                                     
-                                    <li>ktp
+                                    <li>KTP
                                         <a href="{{asset('storage/images/berkas_murid/' .$murid->berkas->ktp)}}" target="_blank" class="badge badge-info {{$murid->berkas->ktp == NULL ? 'hidden' : ''}} ">view</a>
                                       </li>
                                     <li>Foto
@@ -346,8 +293,9 @@
                                     </li>
                                   </ul>
 
+                                </div>  
+
                                 </div>
-                            </div>
                             <button class="btn btn-primary" type="submit" {{$murid->berkas->kartu_keluarga == NULL ? 'disabled' : ''}} >Terima Murid</button>
                             <a href="{{route('data-murid.index')}}" class="btn btn-warning">Batal</a>
                         </form>

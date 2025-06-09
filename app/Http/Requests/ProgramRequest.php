@@ -24,22 +24,23 @@ class ProgramRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama'      => ['required','unique:jurusans'],
-            'singkatan' => ['required','unique:jurusans'],
-            'content'   => ['required'],
-            'image'     => ['required']
+            'hari'         => ['required'],
+            'jam_mulai'    => ['required'],
+            'jam_selesai'  => ['required'],
+            'pelajaran'    => ['required'],
+            'kelas'        => ['required'],
+            'is_active'    => ['nullable'],
         ];
     }
 
     public function messages()
     {
         return [
-           'nama.required'      => 'Program Studi tidak boleh kosong.',
-           'nama.unique'        => 'Program Studi sudah pernah dibuat.',
-           'singkatan.required' => 'Singkatan tidak boleh kosong.',
-           'singkatan.unique'   => 'Singkatan tsudah pernah dibuat.',
-           'content.required'   => 'Content tidak boleh kosong.',
-           'image.required'     => 'Gambar tidak boleh kosong.'
+           'hari.required'         => 'Hari tidak boleh kosong.',
+           'jam_mulai.required'    => 'Jam mulai tidak boleh kosong.',
+           'jam_selesai.required'  => 'Jam selesai tidak boleh kosong.',
+           'pelajaran.required'    => 'Pelajaran tidak boleh kosong.',
+           'kelas.required'        => 'Kelas tidak boleh kosong.',
         ];
     }
 }
